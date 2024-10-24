@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Weather</h1>
+        <form method="post" class="form-inline justify-content-center">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" name="city" class="form-control" placeholder="Enter a city" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Get Weather</button>
+        </form>
+
+        <div class="result">
+            {% if weather %}
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Weather in {{ weather['name'] }}</h2>
+                    <p class="card-text">Temperature: {{ weather['main']['temp'] }}°C</p>
+                    <p class="card-text">Description: {{ weather['weather'][0]['description'] }}</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="result text-center">
+            {% if news %}
+                <hr>
+                <h1 class="text-center mb-4">News</h1>
+                {% for article in news %}
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{{ article['url'] }}"> {{ article['title'] }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
